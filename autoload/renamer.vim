@@ -78,14 +78,6 @@ function renamer#Start(needNewWindow, startLine, startDirectory) "{{{1
   let save_sc = &sc
   set report=10000 nosc
 
-  if !exists('b:RenamerShowHiddenEnabled')
-    if exists('g:RenamerShowHidden') && g:RenamerShowHidden
-      let b:RenamerShowHiddenEnabled = 1
-    else
-      let b:RenamerShowHiddenEnabled = 0
-    endif
-  endif
-
   " Get a blank window, either by
   if a:needNewWindow && !exists('b:renamerDirectory')
     " a) creating a window if non exists, or
@@ -106,6 +98,14 @@ function renamer#Start(needNewWindow, startLine, startDirectory) "{{{1
     " will scroll together.  Seems important to do it early in this function
     " to ensure it's processed for the correct buffer.
     setlocal scrollbind
+  endif
+
+  if !exists('b:RenamerShowHiddenEnabled')
+    if exists('g:RenamerShowHidden') && g:RenamerShowHidden
+      let b:RenamerShowHiddenEnabled = 1
+    else
+      let b:RenamerShowHiddenEnabled = 0
+    endif
   endif
 
   " Process optional parameters to this function and
